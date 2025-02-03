@@ -7,7 +7,8 @@ if [[ $1 ]]; then
     fi
 
     if [ ! -e /dashboard/backup/backup.sql ]; then
-        rm /dashboard/backup/* /dashboard/backup/.* && git clone $1 /dashboard/backup
+        rm /dashboard/backup/* /dashboard/backup/.*
+        git clone $1 /dashboard/backup
     else
         cd /dashboard/backup && git pull
     fi
