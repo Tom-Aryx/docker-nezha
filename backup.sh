@@ -2,18 +2,17 @@
 
 if [[ $1 ]]; then
 
-    if [ ! -e ./backup ]; then
-        mkdir backup
+    if [ ! -e /dashboard/backup ]; then
+        mkdir -p /dashboard/backup
     fi
 
-    cd backup
-
-    if [ ! -e ./backup/backup.sql ]; then
-        rm ./* ./.* && git clone $1 .
+    if [ ! -e /dashboard/backup/backup.sql ]; then
+        rm /dashboard/backup/* /dashboard/backup/.* && git clone $1 /dashboard/backup
     fi
 
-    sqlite3 ../data/sqlite.db ".dump" > temp.sql
-    mv temp.sql backup.sql
+    sqlite3 /dashboard/data/sqlite.db ".dump" > /dashboard/backup/backup.sql
+
+    cd /dashboard/backup
 
     git add .
     git commit -m "Backup sqlite.db"

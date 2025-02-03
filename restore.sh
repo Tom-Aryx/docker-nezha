@@ -2,20 +2,19 @@
 
 if [[ $1 ]]; then
 
-    if [ ! -e ./backup ]; then
-        mkdir backup
+    if [ ! -e /dashboard/backup ]; then
+        mkdir -p /dashboard/backup
     fi
 
-    cd backup
-
-    if [ ! -s ./backup/backup.sql ]; then
-        rm ./* ./.* && git clone $1 .
+    if [ ! -e /dashboard/backup/backup.sql ]; then
+        rm /dashboard/backup/* /dashboard/backup/.* && git clone $1 /dashboard/backup
     fi
 
-    touch restore.db
-    splite3 restore.db ".read ./backup.sql"
+    if [ ! -s /dashboard/backup/backup.sql ]; then
+        splite3 /dashboard/backup/restore.db  ".read /dashboard/backup/backup.sql"
 
-    supervisorctl stop dashboard
-    mv restore.db ../data/sqlite.db
-    supervisorctl start dashboard
+        supervisorctl stop dashboard
+        mv /dashboard/backup/restore.db /dashboard/data/sqlite.db
+        supervisorctl start dashboard
+    fi
 fi
