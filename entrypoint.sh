@@ -83,5 +83,3 @@ fi
 $WORK_DIR/agent service -c ${DATA_DIR}/config.agent.yml start
 # RUN supervisor
 supervisord -c /etc/supervisor/supervisord.conf
-# RUN restore.sh
-/dashboard/restore.sh "${GIT_REPO}"
