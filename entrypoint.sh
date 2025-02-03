@@ -4,17 +4,12 @@
 #ARGO_DOMAIN
 ADMIN_SECRET=${ADMIN_SECRET:-'$2a$10$pGBH10RM.LDvQREgrz60G.cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW'} # default password 'admin'
 CLIENT_SECRET=${CLIENT_SECRET:-"$(openssl rand -base64 24 | sed 's/[\+\/]/q/g')"}
+AGENT_UUID=${AGENT_UUID:-"$(uuidgen)"}
 
 # auto generated variables
 DATA_DIR="$(pwd)/data"
 WORK_DIR="$(pwd)"
 JWT_SECRETKEY="$(openssl rand -base64 768 | sed -e ':a;N;s/\n//g;ta' -e 's/[\+\/]/q/g')"
-AGENT_UUID="$(uuidgen)"
-
-# export
-export GIT_REPO=${GIT_REPO}
-export NTFY_URL=${NTFY_URL}
-export NTFY_SECRET=${NTFY_SECRET}
 
 # first run
 if [ ! -s /etc/supervisor/conf.d/damon.conf ]; then
@@ -89,4 +84,4 @@ $WORK_DIR/agent service -c ${DATA_DIR}/config.agent.yml start
 # RUN supervisor
 supervisord -c /etc/supervisor/supervisord.conf
 # RUN restore.sh
-./restore.sh
+./restore.sh "${GIT_REPO}"

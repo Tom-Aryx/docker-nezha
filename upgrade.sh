@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd /dashboard
+
 DASH_OLD_VERSION="$(./dashboard -v)"
 DASH_NEW_VERSION="$(curl -s https://api.github.com/repos/nezhahq/nezha/releases | grep -m 1 -oP '"tag_name":\s*"v\K[^"]+')"
 
