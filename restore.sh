@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
 
-if [[ $GIT_REPO ]]; then
+if [[ $1 ]]; then
 
-    mkdir backup && cd ./backup && rm ./* ./.*
-    git clone ${GIT_REPO} -
-
-    if [ ! -s backup.sql ]; then
-        touch restore.db
-        splite3 restore.db ".read ./backup.sql"
-        supervisorctl stop dashboard
-        mv ./restore.db ../data/sqlite.db
-        supervisorctl start dashboard
-
-        # notify
-        ../notify.sh 'Restore Done.'
+    if [ ! -e ./backup ]; then
+        mkdir backup
     fi
+
+    cd backup
+
+    if [ ! -s ./backup/backup.sql ]; then
+        rm ./* ./.* && git clone $1 .
+    fi
+
+    touch restore.db
+    splite3 restore.db ".read ./backup.sql"
+
+    supervisorctl stop dashboard
+    mv restore.db ../data/sqlite.db
+    supervisorctl start dashboard
 fi

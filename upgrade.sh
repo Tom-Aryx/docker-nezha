@@ -12,7 +12,4 @@ if [ $DASH_OLD_VERSION != $DASH_NEW_VERSION ]; then
     mv      dashboard-linux-amd64 dashboard
 
     supervisorctl restart dashboard
-
-    # notify
-    ./notify.sh 'Upgrade Done.'
 fi

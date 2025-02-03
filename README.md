@@ -37,11 +37,6 @@ ARGO_TOKEN='ey****J9'
 ADMIN_SECRET='$2a$10$pGBH10RM.LDvQREgrz60G.cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW'
 # agent connection secret
 CLIENT_SECRET='mUI1****96qU'
-# backup and restore repo
-GIT_REPO='https://ghp_****@github.com/User/repo.git'
-# notification
-NTFY_URL='https://ntfy.sh/mytooic'
-NTFY_SECRET='tk_x****4'
 ```
 
 **run in docker**
@@ -51,12 +46,13 @@ docker run -d \
   -e ARGO_TOKEN='ey****J9' \
   -e ADMIN_SECRET='$2a$10$pGBH10RM.LDvQREgrz60G.cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW' \
   -e CLIENT_SECRET='mUI1****96qU' \
-  -e GIT_REPO='https://ghp_****@github.com/User/repo.git' \
-  -e NTFY_URL='https://ntfy.sh/mytooic' \
-  -e NTFY_SECRET='tk_x****4' \
   --name "Dashboard" \
   your-tag
 ```
+
+### 3 backup & restore
+
+### 4 upgrade
 
 ## INSPIRATION
 
