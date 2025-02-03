@@ -4,9 +4,16 @@ nezha over cloudflare tunnel
 
 **still on testing**
 
+**NOTICE**
+
+> ONLY support x64 platform  
+> AUTO backup and upgrade  
+> MANUALLY restore   
+> if you have any nice idea, please ISSUE  
+
 ## DEMO
 
-
+![demo](https://pic.2rmz.com/1734947847381.png)
 
 ## HOW TO USE
 
@@ -37,6 +44,8 @@ ARGO_TOKEN='ey****J9'
 ADMIN_SECRET='$2a$10$pGBH10RM.LDvQREgrz60G.cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW'
 # agent connection secret
 CLIENT_SECRET='mUI1****96qU'
+# local agent uuid
+AGENT_UUID='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 ```
 
 **run in docker**
@@ -46,6 +55,7 @@ docker run -d \
   -e ARGO_TOKEN='ey****J9' \
   -e ADMIN_SECRET='$2a$10$pGBH10RM.LDvQREgrz60G.cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW' \
   -e CLIENT_SECRET='mUI1****96qU' \
+  -e AGENT_UUID='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' \
   --name "Dashboard" \
   your-tag
 ```
