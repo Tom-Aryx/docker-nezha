@@ -8,6 +8,8 @@ if [[ $1 ]]; then
 
     if [ ! -e /dashboard/backup/backup.sql ]; then
         rm /dashboard/backup/* /dashboard/backup/.* && git clone $1 /dashboard/backup
+    else
+        cd /dashboard/backup && git pull
     fi
 
     if [ ! -s /dashboard/backup/backup.sql ]; then
