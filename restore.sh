@@ -13,8 +13,8 @@ if [[ $1 ]]; then
         cd /dashboard/backup && git pull
     fi
 
-    if [ ! -s /dashboard/backup/backup.sql ]; then
-        splite3 /dashboard/backup/restore.db  ".read /dashboard/backup/backup.sql"
+    if [ -s /dashboard/backup/backup.sql ]; then
+        sqlite3 /dashboard/backup/restore.db  ".read /dashboard/backup/backup.sql"
 
         supervisorctl stop dashboard
         mv /dashboard/backup/restore.db /dashboard/data/sqlite.db
