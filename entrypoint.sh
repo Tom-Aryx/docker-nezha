@@ -73,7 +73,6 @@ if [ ! -s /etc/supervisor/conf.d/damon.conf ]; then
     ### replace commands
     sed -e "s#-caddy-cmd-#$CADDY_CMD#g" \
         -e "s#-dashboard-cmd-#$DASHBOARD_CMD#g" \
-        -e "s#-agent-cmd-#$AGENT_CMD#g" \
         -e "s#-cloudflared-cmd-#$CLOUDFLARED_CMD#g" \
         -i /etc/supervisor/conf.d/damon.conf
 
