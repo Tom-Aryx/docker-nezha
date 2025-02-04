@@ -62,7 +62,27 @@ docker run -d \
 
 ### 3 backup & restore
 
+**BACKUP**
+
+- cron and type set whatever you want
+- command must be `/dashboard/backup.sh 'https://your-personal-access-token@github.com/YOU/your_repo'`
+- select the `Local` server
+- notify or not
+
+![image](https://pic.2rmz.com/1738659942609.png)
+
+**RESTORE**
+
+- same as **BACKUP**
+- command set to `/dashboard/restore.sh 'same as above'`
+
+![image](https://pic.2rmz.com/1738659944416.png)
+
 ### 4 upgrade
+
+- command set `/dashboard/upgrade.sh`
+
+![image](https://pic.2rmz.com/1738659946785.png)
 
 ## INSPIRATION
 
