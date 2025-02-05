@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-AGENT_VERSION="$(curl -s https://api.github.com/repos/nezhahq/agent/releases | grep -m 1 -oP '"tag_name":\s*"\K[^"]+')"
+#AGENT_VERSION="$(curl -s https://api.github.com/repos/nezhahq/agent/releases | grep -m 1 -oP '"tag_name":\s*"\K[^"]+')"
+AGENT_VERSION="1.2.0"
 
 wget -q https://github.com/nezhahq/agent/releases/download/${AGENT_VERSION}/nezha-agent_linux_amd64.zip
 unzip nezha-agent_linux_amd64.zip && rm nezha-agent_linux_amd64.zip
@@ -16,7 +17,8 @@ CF_VERSION="$(curl -s https://api.github.com/repos/cloudflare/cloudflared/releas
 wget -q https://github.com/cloudflare/cloudflared/releases/download/${CF_VERSION}/cloudflared-linux-amd64
 mv cloudflared-linux-amd64 cloudflared && chmod +x cloudflared
 
-DASH_VERSION="$(curl -s https://api.github.com/repos/nezhahq/nezha/releases | grep -m 1 -oP '"tag_name":\s*"\K[^"]+')"
+#DASH_VERSION="$(curl -s https://api.github.com/repos/nezhahq/nezha/releases | grep -m 1 -oP '"tag_name":\s*"\K[^"]+')"
+DASH_VERSION="1.3.0"
 
 wget -q https://github.com/nezhahq/nezha/releases/download/${DASH_VERSION}/dashboard-linux-amd64.zip
 unzip dashboard-linux-amd64.zip && rm dashboard-linux-amd64.zip
