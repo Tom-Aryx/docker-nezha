@@ -18,5 +18,5 @@ jobs:
     - name: Build and Push
       uses: docker/build-push-action@v6
       with:
-        puth: true
+        push: true
         tags: taryx/docker-tunnel-nezha:latest
