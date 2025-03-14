@@ -13,7 +13,7 @@ jobs:
       with:
         ref: 1.3.0
     - name: DockerHub Login
-      uses: docker/login-aciton@v3
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
