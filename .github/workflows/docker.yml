@@ -1,0 +1,22 @@
+name: Build Docker Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-image:
+    name: build docker image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+    - name: DockerHub Login
+      uses: docker/login-aciton@v3
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: Build and Push
+      uses: docker/build-push-action@v6
+      with:
+        puth: true
+        tags: taryx/docker-tunnel-nezha:latest
