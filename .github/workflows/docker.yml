@@ -19,4 +19,4 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: taryx/docker-tunnel-nezha:latest
+        tags: taryx/docker-nezha:latest

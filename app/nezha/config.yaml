@@ -4,9 +4,9 @@ language: zh_CN
 sitename: Nezha Monitor
 usertemplate: user-dist
 admintemplate: admin-dist
-jwtsecretkey: -secret-key-1024-
-agentsecretkey: -secret-key-32-
-listenport: 8008
+jwtsecretkey: -jwt-secret-key-
+agentsecretkey: -agent-secret-key-
+listenport: 8080
 listenhost: ""
 installhost: "-install-host-"
 tls: false
