@@ -39,7 +39,7 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
     ## ========== Caddy ==========
     # cert
     openssl genrsa -out $DIR_CADDY/nezha.key 2048
-    openssl req -new -subj "/CN=$ARGO_DOMAIN" -key $DIR_CADDY/nezha.key -out $DIR_CADDY/nezha.csr
+    openssl req -new -subj "/CN=$NEZHA_DOMAIN" -key $DIR_CADDY/nezha.key -out $DIR_CADDY/nezha.csr
     openssl x509 -req -days 36500 -in $DIR_CADDY/nezha.csr -signkey $DIR_CADDY/nezha.key -out $DIR_CADDY/nezha.pem
     CADDY_CMD="$DIR_CADDY/caddy run --config $DIR_CADDY/Caddyfile --watch"
     ## ========== supervisor ==========
