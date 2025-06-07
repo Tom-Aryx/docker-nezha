@@ -1,0 +1,58 @@
+base-url: -base-url-
+behind-proxy: true
+
+listen-http: ":4000"
+metrics-listen-http: ":4001"
+enable-metrics: true
+
+auth-file: /app/ntfy/data/user.db
+auth-default-access: "read-write"
+auth-startup-queries: |
+  pragma journal_mode = WAL;
+  pragma synchronous = normal;
+  pragma temp_store = memory;
+  pragma busy_timeout = 15000;
+  vacuum;
+
+attachment-cache-dir: /app/ntfy/attachments
+attachment-total-size-limit: "1G"
+attachment-file-size-limit: "10M"
+attachment-expiry-duration: "24h"
+
+cache-file: /app/ntfy/data/cache.db
+cache-duration: "24h"
+cache-startup-queries: |
+  pragma journal_mode = WAL;
+  pragma synchronous = normal;
+  pragma temp_store = memory;
+  pragma busy_timeout = 15000;
+  vacuum;
+
+web-push-public-key: -public-key-
+web-push-private-key: -private-key-
+web-push-file: /app/ntfy/data/webpush.db
+web-push-email-address: -email-addr-
+
+keepalive-interval: "45s"
+manager-interval: "1m"
+
+disallowed-topics:
+  - about
+  - contact
+  - fetch
+  - pricing
+
+web-root: /
+
+enable-signup: false
+enable-login: false
+enable-reservations: false
+
+message-size-limit: "16k"
+message-delay-limit: "7d"
+
+global-topic-limit: 15000
+
+log-level: info
+log-format: text
+log-file: /app/ntfy/ntfy.log
