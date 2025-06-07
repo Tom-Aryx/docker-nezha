@@ -16,11 +16,18 @@ alpine container, nezha, nezha-agent
 
 ## HOW TO USE
 
+### 0 Cloudflare tunnel
+
+![public hostname](https://pic.2rmz.com/1734929821974.png)
+
+![tls & http2](https://pic.2rmz.com/1734929824944.png)
+
 ### 1 Docker
 
 **variables**
 ```bash
-# optional
+# required
+ARGO_TOKEN='ey****J9'
 # jwt secret key, random string of any length
 JWT_SECRET='cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW'
 # agent connection secret
@@ -38,11 +45,13 @@ AUTO_RESTORE=1
 **run in docker**
 ```bash
 docker run -d \
-  -p 8080:8080 \
-  -e JWT_SECRET='cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW' \
-  -e AGENT_SECRET='mUI1****96qU' \
-  -e AGENT_UUID='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' \
+  -e ARGO_TOKEN='ey****J9' \
+  #-e JWT_SECRET='cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW' \
+  #-e AGENT_SECRET='mUI1****96qU' \
+  #-e AGENT_UUID='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' \
   -e NEZHA_DOMAIN='panel.nezha.fun:443' \
+  #-e GITHUB_REPO='https://your-personal-access-token@github.com/YOU/your_repo' \
+  #-e AUTO_RESTORE=1 \
   --name "Dashboard" \
   taryx/docker-nezha:latest
 ```
