@@ -3,7 +3,7 @@
 DIR_APP="/app"
 DIR_NEZHA="/app/nezha"
 DIR_AGENT="/app/nezha-agent"
-DIR_CADDY="/app/caddy"
+DIR_CF="/app/cf"
 
 DIR_CONFIG="/app/config"
 DIR_SCRIPTS="/app/scripts"
@@ -12,6 +12,7 @@ JWT_SECRET=${JWT_SECRET:-"$(openssl rand -base64 48 | sed 's/[\+\/]/q/g')"}
 AGENT_SECRET=${AGENT_SECRET:-"$(openssl rand -base64 24 | sed 's/[\+\/]/q/g')"}
 AGENT_UUID=${AGENT_UUID:-"$(uuidgen)"}
 # NEZHA_DOMAIN
+# ARGO_TOKEN
 # GITHUB_REPO
 # AUTO_RESTORE
 
@@ -32,15 +33,15 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
         -e "s#-agent-secret-key-#$AGENT_SECRET#" \
         -i ${DIR_AGENT}/config.yaml
     AGENT_CMD="${DIR_AGENT}/nezha-agent -c ${DIR_AGENT}/config.yaml"
-    ## ========== Caddy ==========
-    CADDY_CMD="${DIR_CADDY}/caddy run --config ${DIR_CADDY}/Caddyfile --watch"
+    ## ========== Cloudflare ==========
+    CLOUDFLARED_CMD="$DIR_CF/cloudflared tunnel --edge-ip-version auto --protocol http2 run --token $ARGO_TOKEN"
     ## ========== supervisor ==========
     # copy
     mkdir -p /etc/supervisor.d && cp ${DIR_APP}/apps.ini /etc/supervisor.d/apps.ini
     # replace
     sed -e "s#-nezha-cmd-#$NEZHA_CMD#g" \
         -e "s#-agent-cmd-#$AGENT_CMD#g" \
-        -e "s#-caddy-cmd-#$CADDY_CMD#g" \
+        -e "s#-cloudflare-cmd-#$CLOUDFLARED_CMD#g" \
         -i /etc/supervisor.d/apps.ini
 fi
 
