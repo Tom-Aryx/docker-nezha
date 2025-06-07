@@ -3,6 +3,7 @@
 DIR_APP="/app"
 DIR_NEZHA="/app/nezha"
 DIR_AGENT="/app/nezha-agent"
+DIR_CADDY="/app/caddy"
 
 DIR_CONFIG="/app/config"
 DIR_SCRIPTS="/app/scripts"
@@ -31,12 +32,15 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
         -e "s#-agent-secret-key-#$AGENT_SECRET#" \
         -i ${DIR_AGENT}/config.yaml
     AGENT_CMD="${DIR_AGENT}/nezha-agent -c ${DIR_AGENT}/config.yaml"
+    ## ========== Caddy ==========
+    CADDY_CMD="${DIR_CADDY}/caddy run --config ${DIR_CADDY}/Caddyfile --watch"
     ## ========== supervisor ==========
     # copy
     mkdir -p /etc/supervisor.d && cp ${DIR_APP}/apps.ini /etc/supervisor.d/apps.ini
     # replace
     sed -e "s#-nezha-cmd-#$NEZHA_CMD#g" \
         -e "s#-agent-cmd-#$AGENT_CMD#g" \
+        -e "s#-caddy-cmd-#$CADDY_CMD#g" \
         -i /etc/supervisor.d/apps.ini
 fi
 
