@@ -6,7 +6,7 @@ usertemplate: user-dist
 admintemplate: admin-dist
 jwtsecretkey: -jwt-secret-key-
 agentsecretkey: -agent-secret-key-
-listenport: 8081
+listenport: 8080
 listenhost: ""
 installhost: "-install-host-"
 tls: false
