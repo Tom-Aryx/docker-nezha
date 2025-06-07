@@ -1,14 +1,13 @@
-# docker-tunnel-nezha
+# docker-nezha
 
-nezha over cloudflare tunnel
+alpine container, nezha, nezha-agent 
 
 **still on testing**
 
 **NOTICE**
 
 > ONLY support x64 platform  
-> AUTO backup and upgrade  
-> MANUALLY restore   
+> AUTO backup, upgrade and restore   
 > if you have any nice idea, please ISSUE  
 
 ## DEMO
@@ -17,74 +16,70 @@ nezha over cloudflare tunnel
 
 ## HOW TO USE
 
-### 0 build
-
-```bash
-git clone https://github.com/Tom-Aryx/docker-tunnel-nezha
-cd docker-tunnel-nezha
-docker build -t your-tag .
-```
-
-### 1 cloudflare tunnel
-
-![public hostname](https://pic.2rmz.com/1734929821974.png)
-
-![tls & http2](https://pic.2rmz.com/1734929824944.png)
-
-### 2 run
+### 1 Docker
 
 **variables**
 ```bash
-# required
-ARGO_DOMAIN='test.example.com'
-ARGO_TOKEN='ey****J9'
-
 # optional
-# use Bcrypt to generate, online tool link: https://bcrypt.online/
-ADMIN_SECRET='$2a$10$pGBH10RM.LDvQREgrz60G.cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW'
+# jwt secret key, random string of any length
+JWT_SECRET='cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW'
 # agent connection secret
-CLIENT_SECRET='mUI1****96qU'
+AGENT_SECRET='mUI1****96qU'
 # local agent uuid
 AGENT_UUID='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+# dashboard domain with port (80 or 443 or any)
+NEZHA_DOMAIN='panel.nezha.fun:443'
+# restore from github repo
+GITHUB_REPO='https://your-personal-access-token@github.com/YOU/your_repo'
+# if set, restore at first starting. otherwise, GITHUB_REPO is useless.
+AUTO_RESTORE=1
 ```
 
 **run in docker**
 ```bash
 docker run -d \
-  -e ARGO_DOMAIN='test.example.com' \
-  -e ARGO_TOKEN='ey****J9' \
-  -e ADMIN_SECRET='$2a$10$pGBH10RM.LDvQREgrz60G.cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW' \
-  -e CLIENT_SECRET='mUI1****96qU' \
+  -p 8080:8080 \
+  -e JWT_SECRET='cP77QlrIbQVRCJ3ygB2pwKMUN8GiucW' \
+  -e AGENT_SECRET='mUI1****96qU' \
   -e AGENT_UUID='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' \
+  -e NEZHA_DOMAIN='panel.nezha.fun:443' \
   --name "Dashboard" \
-  your-tag
+  taryx/docker-nezha:latest
 ```
 
-### 3 backup & restore
+### 2 Backup & Restore
 
 **BACKUP**
 
 - cron and type set whatever you want
-- command must be `/dashboard/backup.sh 'https://your-personal-access-token@github.com/YOU/your_repo'`
+- command must be `/app/scripts/backup.sh 'https://your-personal-access-token@github.com/YOU/your_repo'`
 - select the `Local` server
 - notify or not
 
 ![image](https://pic.2rmz.com/1738659942609.png)
 
-**RESTORE**
+**Manual RESTORE**
 
 - same as **BACKUP**
-- command set to `/dashboard/restore.sh 'same as above'`
+- command set to `/app/scripts/restore.sh 'https://your-personal-access-token@github.com/YOU/your_repo'`
 
 ![image](https://pic.2rmz.com/1738659944416.png)
 
-### 4 upgrade
+### 3 upgrade
 
-- command set `/dashboard/upgrade.sh`
+- command set `/app/scripts/upgrade.sh`
 
 ![image](https://pic.2rmz.com/1738659946785.png)
 
-## INSPIRATION
+## BUILD
+
+```bash
+git clone https://github.com/Tom-Aryx/docker-nezha
+cd docker-nezha
+docker build -t your-tag .
+```
+
+### INSPIRATION
 
 [nezhahq/nezha](https://github.com/nezhahq/nezha)  
 [nezhahq/agent](https://github.com/nezhahq/agent)  
