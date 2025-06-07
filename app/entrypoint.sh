@@ -3,6 +3,7 @@
 DIR_APP="/app"
 DIR_NEZHA="/app/nezha"
 DIR_AGENT="/app/nezha-agent"
+DIR_CADDY="/app/caddy"
 DIR_CF="/app/cf"
 
 DIR_CONFIG="/app/config"
@@ -35,12 +36,19 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
     AGENT_CMD="${DIR_AGENT}/nezha-agent -c ${DIR_AGENT}/config.yaml"
     ## ========== Cloudflare ==========
     CLOUDFLARED_CMD="$DIR_CF/cloudflared tunnel --edge-ip-version auto --protocol http2 run --token $ARGO_TOKEN"
+    ## ========== Caddy ==========
+    # cert
+    openssl genrsa -out $DIR_CADDY/nezha.key 2048
+    openssl req -new -subj "/CN=$ARGO_DOMAIN" -key $DIR_CADDY/nezha.key -out $DIR_CADDY/nezha.csr
+    openssl x509 -req -days 36500 -in $DIR_CADDY/nezha.csr -signkey $DIR_CADDY/nezha.key -out $DIR_CADDY/nezha.pem
+    CADDY_CMD="$DIR_CADDY/caddy run --config $DIR_CADDY/Caddyfile --watch"
     ## ========== supervisor ==========
     # copy
     mkdir -p /etc/supervisor.d && cp ${DIR_APP}/apps.ini /etc/supervisor.d/apps.ini
     # replace
     sed -e "s#-nezha-cmd-#$NEZHA_CMD#g" \
         -e "s#-agent-cmd-#$AGENT_CMD#g" \
+        -e "s#-caddy-cmd-#$CADDY_CMD#g" \
         -e "s#-cloudflare-cmd-#$CLOUDFLARED_CMD#g" \
         -i /etc/supervisor.d/apps.ini
 fi
