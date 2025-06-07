@@ -1,0 +1,290 @@
+http:
+  pprof:
+    port: 6060
+    enabled: false
+  address: 0.0.0.0:6080
+  session_ttl: 720h
+users:
+  - name: -user-
+    password: -password-
+auth_attempts: 5
+block_auth_min: 15
+http_proxy: ""
+language: en
+theme: auto
+dns:
+  bind_hosts:
+    - 0.0.0.0
+  port: 53
+  anonymize_client_ip: false
+  ratelimit: 20
+  ratelimit_subnet_len_ipv4: 24
+  ratelimit_subnet_len_ipv6: 56
+  ratelimit_whitelist: []
+  refuse_any: true
+  upstream_dns:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+    - quic://94.140.14.14
+  upstream_dns_file: ""
+  bootstrap_dns:
+    - 1.1.1.1
+    - 8.8.8.8
+  fallback_dns:
+    - tls://1.1.1.1
+    - tls://8.8.8.8
+  upstream_mode: load_balance
+  fastest_timeout: 1s
+  allowed_clients: []
+  disallowed_clients: []
+  blocked_hosts:
+    - version.bind
+    - id.server
+    - hostname.bind
+  trusted_proxies:
+    - 127.0.0.0/8
+    - ::1/128
+  cache_size: 4194304
+  cache_ttl_min: 600
+  cache_ttl_max: 604800
+  cache_optimistic: true
+  bogus_nxdomain: []
+  aaaa_disabled: true
+  enable_dnssec: true
+  edns_client_subnet:
+    custom_ip: ""
+    enabled: false
+    use_custom: false
+  max_goroutines: 300
+  handle_ddr: true
+  ipset: []
+  ipset_file: ""
+  bootstrap_prefer_ipv6: false
+  upstream_timeout: 10s
+  private_networks: []
+  use_private_ptr_resolvers: false
+  local_ptr_upstreams: []
+  use_dns64: false
+  dns64_prefixes: []
+  serve_http3: false
+  use_http3_upstreams: false
+  serve_plain_dns: false
+  hostsfile_enabled: true
+tls:
+  enabled: true
+  server_name: dns.adguard.com
+  force_https: false
+  port_https: 443
+  port_dns_over_tls: 853
+  port_dns_over_quic: 853
+  port_dnscrypt: 0
+  dnscrypt_config_file: ""
+  allow_unencrypted_doh: false
+  certificate_chain: ""
+  private_key: ""
+  certificate_path: /app/AdGuard/cert/adguard.pem
+  private_key_path: /app/AdGuard/cert/adguard.key
+  strict_sni_check: false
+querylog:
+  dir_path: ""
+  ignored: []
+  interval: 168h
+  size_memory: 1000
+  enabled: false
+  file_enabled: false
+statistics:
+  dir_path: ""
+  ignored: []
+  interval: 720h
+  enabled: true
+filters:
+  - enabled: true
+    url: https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt
+    name: AdBlockFilters
+    id: 1738680023
+  - enabled: true
+    url: https://cdn.jsdelivr.net/gh/neoFelhz/neohosts@gh-pages/full/hosts.txt
+    name: FullHosts
+    id: 1738680024
+whitelist_filters: []
+user_rules:
+  - '@@||cloudfront.net^$important'
+  - '@@||wan.baidu.com^$important'
+  - '@@||m.baidu.com^$important'
+  - '@@||g.alicdn.com^$important'
+  - '@@||img.alicdn.com^$important'
+  - '@@||iconfont.cn^$important'
+  - '@@||mmstat.com^$important'
+  - '@@||fun^$important'
+  - '@@||biz^$important'
+  - '@@||club^$important'
+  - '@@||info^$important'
+  - '@@||www.cnnic.com.cn^$important'
+  - '@@||gia.jd.com^$important'
+  - '@@||static.cloudflareinsights.com^$important'
+  - '@@||www.edmtop.top^$important'
+  - '@@||wmimg.com^$important'
+  - '@@||crackemby.mb6.top^$important'
+  - '||o1098464.ingest.sentry.io^$important'
+  - '||makeding.com^$important'
+  - '||p1-lm.adukwai.com^$important'
+  - '||p3.dcarimg.com^$important'
+  - '# 轮子和假新闻网站'
+  - '/falun/$important'
+  - '/falundafa/$important'
+  - '/minghui/$important'
+  - '/epochtimes/$important'
+  - '/ntdtv/$important'
+  - '/voachinese/$important'
+  - '/appledaily/$important'
+  - '/nextdigital/$important'
+  - '/dalailama/$important'
+  - '/nytimes/$important'
+  - '/bloomberg/$important'
+  - '/independent/$important'
+  - '/freetibet/$important'
+  - '/citizenpowerfor/$important'
+  - '||freebrowser.org^$important'
+  - '||freewechat.com^$important'
+  - '||freeweibo.com^$important'
+  - '||freezhihu.org^$important'
+  - '||greatfire.org^$important'
+  - '||pao-pao.net^$important'
+  - '||wikiunblocked.org^$important'
+  - '||rfa.org^$important'
+  - '||theinitium.com^$important'
+  - '||tibet.net^$important'
+  - '||jw.org^$important'
+  - '||bannedbook.org^$important'
+  - '||dw.com^$important'
+  - '||storm.mg^$important'
+  - '||yam.com^$important'
+  - '||chinadigitaltimes^$important'
+  - '||ltn.com.tw^$important'
+  - '||mpweekly.com^$important'
+  - '||cup.com.hk^$important'
+  - '||thenewslens.com^$important'
+  - '||inside.com.tw^$important'
+  - '||everylittled.com^$important'
+  - '||cool3c.com^$important'
+  - '||taketla.zaiko.io^$important'
+  - '||news.agentm.tw^$important'
+  - '||sportsv.net^$important'
+  - '||research.tnlmedia.com^$important'
+  - '||ad2iction.com^$important'
+  - '||viad.com.tw^$important'
+  - '||tnlmedia.com^$important'
+  - '||becomingaces.com^$important'
+  - '||pincong.rocks^$important'
+  - '||flipboard.com^$important'
+  - '||soundofhope.org^$important'
+  - '||wenxuecity.com^$important'
+  - '||aboluowang.com^$important'
+  - '||2047.name^$important'
+  - '||shu.best^$important'
+  - '||shenyunperformingarts.org^$important'
+  - '||bbc.co.uk^$important'
+  - '||cirosantilli^$important'
+  - '||wsj.com^$important'
+  - '||rfi.fr^$important'
+  - '||chinapress.com.my^$important'
+  - '||hancel.org^$important'
+  - '||miraheze.org^$important'
+  - '||zhuichaguoji.org^$important'
+  - '||fawanghuihui.org^$important'
+  - '||hopto.org^$important'
+  - '||amnesty.org^$important'
+  - '||hrw.org^$important'
+  - '||irmct.org^$important'
+  - '||zhengjian.org^$important'
+  - '||wujieliulan.com^$important'
+  - '||dongtaiwang.com^$important'
+  - '||wujieliulan.com^$important'
+  - '||ultrasurf.us^$important'
+  - '||yibaochina.com^$important'
+  - '||roc-taiwan.org^$important'
+  - '||creaders.net^$important'
+  - '||upmedia.mg^$important'
+  - '||ydn.com.tw^$important'
+  - '||udn.com^$important'
+  - '||theaustralian.com.au^$important'
+  - '||rfa.org^$important'
+  - '||voacantonese.com^$important'
+  - '||voanews.com^$important'
+  - '||bitterwinter.org^$important'
+  - '||christianstudy.com^$important'
+  - '||learnfalungong.com^$important'
+dhcp:
+  enabled: false
+  interface_name: ""
+  local_domain_name: lan
+  dhcpv4:
+    gateway_ip: ""
+    subnet_mask: ""
+    range_start: ""
+    range_end: ""
+    lease_duration: 86400
+    icmp_timeout_msec: 1000
+    options: []
+  dhcpv6:
+    range_start: ""
+    lease_duration: 86400
+    ra_slaac_only: false
+    ra_allow_slaac: false
+filtering:
+  blocking_ipv4: ""
+  blocking_ipv6: ""
+  blocked_services:
+    schedule:
+      time_zone: Asia/Shanghai
+    ids: []
+  protection_disabled_until: null
+  safe_search:
+    enabled: false
+    bing: true
+    duckduckgo: true
+    ecosia: true
+    google: true
+    pixabay: true
+    yandex: true
+    youtube: true
+  blocking_mode: default
+  parental_block_host: family-block.dns.adguard.com
+  safebrowsing_block_host: standard-block.dns.adguard.com
+  rewrites:
+    - domain: s21.ax1x.com
+      answer: cache.ax1x.com
+  safe_fs_patterns:
+    - /app/data/userfilters/*
+  safebrowsing_cache_size: 1048576
+  safesearch_cache_size: 1048576
+  parental_cache_size: 1048576
+  cache_time: 30
+  filters_update_interval: 168
+  blocked_response_ttl: 10
+  filtering_enabled: true
+  parental_enabled: false
+  safebrowsing_enabled: false
+  protection_enabled: true
+clients:
+  runtime_sources:
+    whois: true
+    arp: true
+    rdns: true
+    dhcp: true
+    hosts: true
+  persistent: []
+log:
+  enabled: false
+  file: ""
+  max_backups: 0
+  max_size: 100
+  max_age: 3
+  compress: false
+  local_time: false
+  verbose: false
+os:
+  group: ""
+  user: ""
+  rlimit_nofile: 0
+schema_version: 29
