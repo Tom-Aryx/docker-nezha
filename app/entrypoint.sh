@@ -69,6 +69,6 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
 fi
 
 # RUN freshrss
-/var/www/FreshRSS/Docker/entrypoint.sh && ([ -z "$CRON_MIN" ] || crond -d 6) && httpd -D BACKGROUND
+#/var/www/FreshRSS/Docker/entrypoint.sh && ([ -z "$CRON_MIN" ] || crond -d 6) && httpd -D BACKGROUND
 # RUN supervisor
 supervisord -c /etc/supervisord.conf
