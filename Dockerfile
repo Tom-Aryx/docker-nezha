@@ -1,4 +1,4 @@
-FROM freshrss/freshrss:alpine
+FROM alpine:3.22
 
 RUN apk add curl git grep iproute2 openrc openssl sed sqlite supervisor unzip util-linux wget && \
     apk cache clean && \
