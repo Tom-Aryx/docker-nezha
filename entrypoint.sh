@@ -66,6 +66,14 @@ if [ ! -s ${DIR_CADDY}/Caddyfile ]; then
     cp /config/caddy/Caddyfile ${DIR_CADDY}/Caddyfile
 fi
 
+# cloudflare
+if [ ! -s ${DIR_CF}/cloudflared ]; then
+    cd ${DIR_CF} && \
+    wget -q https://github.com/cloudflare/cloudflared/releases/download/$(curl -s https://api.github.com/repos/cloudflare/cloudflared/releases | grep -m 1 -oP '"tag_name":\s*"\K[^"]+')/cloudflared-linux-amd64 && \
+    mv cloudflared-linux-amd64 cloudflared && \
+    chmod +x cloudflared
+fi
+
 # first run
 if [ ! -s /etc/supervisor.d/apps.ini ]; then
     ## ========== nezha ==========
