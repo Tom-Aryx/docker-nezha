@@ -1,0 +1,15 @@
+
+- name: Argo-Vless
+  type: vless
+  server: icook.hk
+  port: 443
+  uuid: -uuid-
+  tls: true
+  udp: true
+  servername: -argo-domain-
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: fetch?ed=2048
+    headers:
+      Host: -argo-domain-
