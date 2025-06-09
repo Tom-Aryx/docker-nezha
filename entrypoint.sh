@@ -6,7 +6,6 @@ DIR_ADGUARD="/app/AdGuard"
 DIR_CADDY="/app/caddy"
 DIR_NTFY="/app/ntfy"
 
-AGENT_SECRET=${AGENT_SECRET:-"$(openssl rand -base64 24 | sed 's/[\+\/]/q/g')"}
 AGENT_UUID=${AGENT_UUID:-"$(uuidgen)"}
 # NEZHA_SERVER
 # ADGUARD_USER
