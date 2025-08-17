@@ -52,8 +52,8 @@ if [ ! -s ${DIR_MEMOS}/memos ]; then
     MEMOS_VERSION="$(curl -s https://api.github.com/repos/usememos/memos/releases | grep -m 1 -oP '"tag_name":\s*"v\K[^"]+')"
     cd ${DIR_MEMOS} && \
     wget -q https://github.com/usememos/memos/releases/download/v${MEMOS_VERSION}/memos_v${MEMOS_VERSION}_linux_amd64.tar.gz && \
-    tar -xzf memos_${MEMOS_VERSION}_linux_amd64.tar.gz && \
-    rm memos_${MEMOS_VERSION}_linux_amd64.tar.gz LICENSE README.md && \
+    tar -xzf memos_v${MEMOS_VERSION}_linux_amd64.tar.gz && \
+    rm memos_v${MEMOS_VERSION}_linux_amd64.tar.gz LICENSE README.md && \
     chmod +x ./memos
 fi
 
@@ -65,7 +65,7 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
     ## ========== artalk ==========
     ARTALK_CMD="${DIR_ARTALK}/artalk server"
     ## ========== memos ==========
-    MEMOES_CMD="${DIR_MEMOS}/memos --data ${DIR_MEMOS}/data --driver postgres --dsn '${MEMOS_PGSQL}'"
+    MEMOS_CMD="${DIR_MEMOS}/memos --data ${DIR_MEMOS}/data --driver postgres --dsn '${MEMOS_PGSQL}'"
     ## ========== supervisor ==========
     # copy
     cp /config/apps.ini /etc/supervisor.d/apps.ini && \
