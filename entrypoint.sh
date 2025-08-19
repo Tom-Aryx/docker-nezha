@@ -5,12 +5,11 @@ DIR_AGENT="/app/nezha-agent"
 DIR_ARTALK="/app/artalk"
 DIR_MEMOS="/app/memos"
 
-AGENT_SECRET=${AGENT_SECRET:-"$(openssl rand -base64 24 | sed 's/[\+\/]/q/g')"}
-AGENT_UUID=${AGENT_UUID:-"$(uuidgen)"}
+AGENT_SECRET=${AGENT_SECRET}
+AGENT_UUID=${AGENT_UUID}
 # NEZHA_SERVER
-# MEMOS_MYSQL
 
-mkdir -p ${DIR_AGENT} ${DIR_ARTALK}/data ${DIR_MEMOS}/data
+mkdir -p ${DIR_AGENT} ${DIR_ARTALK}/data ${DIR_MEMOS}/data/backup
 
 # nezha-agent
 if [ ! -s ${DIR_AGENT}/nezha-agent ]; then
@@ -65,7 +64,7 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
     ## ========== artalk ==========
     ARTALK_CMD="${DIR_ARTALK}/artalk server"
     ## ========== memos ==========
-    MEMOS_CMD="${DIR_MEMOS}/memos --addr '0.0.0.0' --data ${DIR_MEMOS}/data --driver mysql --dsn '${MEMOS_MYSQL}'"
+    MEMOS_CMD="${DIR_MEMOS}/memos --addr '0.0.0.0' --data ${DIR_MEMOS}/data"
     ## ========== supervisor ==========
     # copy
     cp /config/apps.ini /etc/supervisor.d/apps.ini && \

@@ -1,6 +1,6 @@
 FROM frolvlad/alpine-glibc:alpine-3.21_glibc-2.41
 
-RUN apk add curl grep iproute2 openrc sed supervisor tzdata unzip util-linux wget && \
+RUN apk add curl git grep iproute2 openrc sed sqlite supervisor tzdata unzip wget && \
     apk cache clean && \
     rm -rf /var/cache/apk/* && \
     mkdir -p /run/openrc && touch /run/openrc/softlevel
