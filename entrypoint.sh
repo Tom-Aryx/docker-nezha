@@ -65,7 +65,7 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
     ## ========== artalk ==========
     ARTALK_CMD="${DIR_ARTALK}/artalk server"
     ## ========== memos ==========
-    MEMOS_CMD="${DIR_MEMOS}/memos --data ${DIR_MEMOS}/data --driver postgres --dsn '${MEMOS_PGSQL}'"
+    MEMOS_CMD="${DIR_MEMOS}/memos --addr '0.0.0.0' --data ${DIR_MEMOS}/data --driver postgres --dsn '${MEMOS_PGSQL}'"
     ## ========== supervisor ==========
     # copy
     cp /config/apps.ini /etc/supervisor.d/apps.ini && \
