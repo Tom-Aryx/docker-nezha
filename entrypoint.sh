@@ -8,7 +8,7 @@ DIR_MEMOS="/app/memos"
 AGENT_SECRET=${AGENT_SECRET:-"$(openssl rand -base64 24 | sed 's/[\+\/]/q/g')"}
 AGENT_UUID=${AGENT_UUID:-"$(uuidgen)"}
 # NEZHA_SERVER
-# MEMOS_PGSQL
+# MEMOS_MYSQL
 
 mkdir -p ${DIR_AGENT} ${DIR_ARTALK}/data ${DIR_MEMOS}/data
 
@@ -49,8 +49,7 @@ fi
 
 # memos
 if [ ! -s ${DIR_MEMOS}/memos ]; then
-    #MEMOS_VERSION="$(curl -s https://api.github.com/repos/usememos/memos/releases | grep -m 1 -oP '"tag_name":\s*"v\K[^"]+')"
-    MEMOS_VERSION="0.24.4"
+    MEMOS_VERSION="$(curl -s https://api.github.com/repos/usememos/memos/releases | grep -m 1 -oP '"tag_name":\s*"v\K[^"]+')"
     cd ${DIR_MEMOS} && \
     wget -q https://github.com/usememos/memos/releases/download/v${MEMOS_VERSION}/memos_v${MEMOS_VERSION}_linux_amd64.tar.gz && \
     tar -xzf memos_v${MEMOS_VERSION}_linux_amd64.tar.gz && \
@@ -66,7 +65,7 @@ if [ ! -s /etc/supervisor.d/apps.ini ]; then
     ## ========== artalk ==========
     ARTALK_CMD="${DIR_ARTALK}/artalk server"
     ## ========== memos ==========
-    MEMOS_CMD="${DIR_MEMOS}/memos --addr '0.0.0.0' --data ${DIR_MEMOS}/data --driver postgres --dsn '${MEMOS_PGSQL}'"
+    MEMOS_CMD="${DIR_MEMOS}/memos --addr '0.0.0.0' --data ${DIR_MEMOS}/data --driver mysql --dsn '${MEMOS_MYSQL}'"
     ## ========== supervisor ==========
     # copy
     cp /config/apps.ini /etc/supervisor.d/apps.ini && \
