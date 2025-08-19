@@ -49,7 +49,8 @@ fi
 
 # memos
 if [ ! -s ${DIR_MEMOS}/memos ]; then
-    MEMOS_VERSION="$(curl -s https://api.github.com/repos/usememos/memos/releases | grep -m 1 -oP '"tag_name":\s*"v\K[^"]+')"
+    #MEMOS_VERSION="$(curl -s https://api.github.com/repos/usememos/memos/releases | grep -m 1 -oP '"tag_name":\s*"v\K[^"]+')"
+    MEMOS_VERSION="0.24.4"
     cd ${DIR_MEMOS} && \
     wget -q https://github.com/usememos/memos/releases/download/v${MEMOS_VERSION}/memos_v${MEMOS_VERSION}_linux_amd64.tar.gz && \
     tar -xzf memos_v${MEMOS_VERSION}_linux_amd64.tar.gz && \
